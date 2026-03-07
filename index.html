@@ -16,19 +16,68 @@
 </head>
 
 <body>
+    <!-- Background Animation Container -->
+    <div id="bgAnimationContainer" class="bg-animation-container"></div>
+
+    <!-- Settings Menu Overlay -->
+    <div class="settings-overlay" id="settingsOverlay">
+        <div class="settings-panel">
+            <i class='bx bx-x' id="close-settings"></i>
+            <h3>Settings</h3>
+
+            <div class="setting-item">
+                <a href="#contact" class="btn" style="width: 100%; text-align: center; display: block;"
+                    id="settings-contact-btn"><i class='bx bx-envelope'></i> Contact Me</a>
+            </div>
+
+            <div class="setting-item">
+                <a href="https://calendly.com/naveenveeramreddy181668/new-meeting" target="_blank"
+                    style="text-decoration: none; display: block;" class="contact-link">
+                    <p
+                        style="margin-bottom: 0; display: flex; align-items: center; gap: 0.8rem; color: var(--text-color);">
+                        <i class='bx bx-calendar-event'></i> Schedule Meeting
+                    </p>
+                </a>
+            </div>
+
+            <div class="setting-item">
+                <p><i class='bx bx-sun'></i> Theme Setup</p>
+                <div class="theme-toggle">
+                    <label class="switch">
+                        <input type="checkbox" id="themeSwitch">
+                        <span class="slider round"></span>
+                    </label>
+                    <span id="themeLabel">Dark Mode</span>
+                </div>
+            </div>
+
+            <div class="setting-item">
+                <p><i class='bx bx-bulb'></i> Screen Brightness</p>
+                <input type="range" min="30" max="100" value="100" id="brightnessSlider">
+            </div>
+
+
+        </div>
+    </div>
 
     <!-- Header Navigation -->
     <header class="header">
-        <a href="#" class="logo">Naveen<span>.</span></a>
+        <div class="header-left">
+            <i class='bx bx-menu' id="menu-icon"></i>
+            <a href="#" class="logo">Naveen<span>.</span></a>
+        </div>
 
-        <i class='bx bx-menu' id="menu-icon"></i>
+        <i class='bx bx-cog' id="settings-icon"></i>
 
         <nav class="navbar">
             <a href="#home" class="active">Home</a>
             <a href="#skills">Skills</a>
+            <a href="#services">Services</a>
             <a href="#projects">Projects</a>
             <a href="#education">Education</a>
             <a href="#certificates">Certificates</a>
+            <a href="#github">GitHub</a>
+            <a href="#contact">Contact</a>
         </nav>
     </header>
 
@@ -47,7 +96,10 @@
                 <a href="https://github.com/Naveenveeramreddy" target="_blank"><i class='bx bxl-github'></i></a>
                 <a href="mailto:naveenveeramreddy181668@gmail.com"><i class='bx bx-envelope'></i></a>
             </div>
-            <a href="#projects" class="btn">View My Work</a>
+            <div class="btn-group">
+                <a href="#projects" class="btn">View My Work</a>
+                <a href="Veeramreddy_Naveen_Resume.pdf" download class="btn">Download CV</a>
+            </div>
         </div>
 
         <div class="home-img">
@@ -59,24 +111,144 @@
 
     <!-- Skills Section -->
     <section id="skills" class="skills">
-        <h2 class="heading">My <span>Skills</span></h2>
+        <h2 class="heading" id="skills-heading">My <span>Skills</span></h2>
 
-        <div class="skills-container">
-            <div class="skills-box">
-                <i class='bx bxl-python'></i>
-                <h3>Languages & Scripting</h3>
-                <p>Python, SQL, AWS, LLMs</p>
+        <div class="skills-grid">
+            <div class="skill-category" onclick="expandSkill('cloud', this)">
+                <i class='bx bx-cloud'></i>
+                <h3>Cloud</h3>
+                <div class="skill-chips">
+                    <span title="Amazon Web Services platform">AWS</span>
+                    <span title="Elastic Compute Cloud">EC2</span>
+                    <span title="Application Load Balancer">ALB</span>
+                    <span title="Virtual Private Cloud">VPC</span>
+                    <span title="Web Application Firewall">WAF</span>
+                    <span title="Amazon Machine Image">AMI</span>
+                    <span title="Relational Database Service">RDS</span>
+                    <span title="Amazon Neptune Graph Db">Neptune</span>
+                    <span title="NoSQL Database">DynamoDB</span>
+                    <span title="Elastic Block Store">EBS</span>
+                    <span title="Elastic File System">EFS</span>
+                    <span title="Serverless Compute">Lambda</span>
+                    <span title="Identity and Access Management">IAM</span>
+                    <span title="Simple Storage Service">S3</span>
+                    <span title="Domain Name System">Route 53</span>
+                    <span title="AWS Certificate Manager">ACM</span>
+                    <span title="Content Delivery Network">CloudFront</span>
+                    <span title="Machine Learning Ops">MLOps</span>
+                </div>
+                <button class="btn view-projects-btn" onclick="filterProjectsAndScroll('cloud', event)"><i
+                        class='bx bx-link-external'></i> View Cloud Projects</button>
             </div>
-            <div class="skills-box">
-                <i class='bx bxl-docker'></i>
-                <h3>DevOps & Tools</h3>
-                <p>Linux, Terraform, OpenTofu, Git, GitHub Actions, Kubernetes</p>
+
+            <div class="skill-category" onclick="expandSkill('devops', this)">
+                <i class='bx bx-server'></i>
+                <h3>DevOps</h3>
+                <div class="skill-chips">
+                    <span>Docker</span>
+                    <span>Kubernetes</span>
+                    <span>GitHub Actions</span>
+                    <span>Terraform</span>
+                    <span>OpenTofu</span>
+                </div>
+                <button class="btn view-projects-btn" onclick="filterProjectsAndScroll('devops', event)"><i
+                        class='bx bx-link-external'></i> View DevOps Projects</button>
             </div>
-            <div class="skills-box">
-                <i class='bx bx-bot'></i>
-                <h3>LLMs & Automation</h3>
-                <p>Langchain, MCP Server, Automation Anywhere, N8N</p>
+
+            <div class="skill-category" onclick="expandSkill('code', this)">
+                <i class='bx bx-code-alt'></i>
+                <h3>Languages & Databases</h3>
+                <div class="skill-chips">
+                    <span>Python</span>
+                    <span>SQL</span>
+                    <span>Elasticsearch</span>
+                    <span>MongoDB</span>
+                </div>
+                <button class="btn view-projects-btn" onclick="filterProjectsAndScroll('all', event)"><i
+                        class='bx bx-link-external'></i> View All Projects</button>
             </div>
+
+            <div class="skill-category" onclick="expandSkill('automation', this)">
+                <i class='bx bx-cog'></i>
+                <h3>Automation</h3>
+                <div class="skill-chips">
+                    <span title="Robotic Process Automation platform">Automation Anywhere</span>
+                    <span title="Workflow automation tool">N8N</span>
+                </div>
+                <button class="btn view-projects-btn" onclick="filterProjectsAndScroll('automation', event)"><i
+                        class='bx bx-link-external'></i> View Automation Projects</button>
+            </div>
+
+            <div class="skill-category" onclick="expandSkill('ai', this)">
+                <i class='bx bx-brain'></i>
+                <h3>AI & LLM</h3>
+                <div class="skill-chips">
+                    <span>LangChain</span>
+                    <span>MCP Servers</span>
+                    <span>Agentic AI</span>
+                </div>
+                <button class="btn view-projects-btn" onclick="filterProjectsAndScroll('ai', event)"><i
+                        class='bx bx-link-external'></i> View AI Projects</button>
+            </div>
+            <div class="skill-category" onclick="expandSkill('tools', this)">
+                <i class='bx bx-wrench'></i>
+                <h3>Tools</h3>
+                <div class="skill-chips">
+                    <span title="Version control system">Git / GitHub</span>
+                    <span title="Code Editor">VS Code</span>
+                </div>
+                <button class="btn view-projects-btn" onclick="filterProjectsAndScroll('all', event)"><i
+                        class='bx bx-link-external'></i> View All Projects</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2 class="heading">Freelance <span>Services</span></h2>
+
+        <div class="services-container">
+            <div class="services-box" onclick="toggleService('cloud')">
+                <i class='bx bx-cloud'></i>
+                <h3>Cloud Solutions</h3>
+                <p class="service-demo" id="demo-cloud">I design and deploy scalable cloud infrastructure on AWS,
+                    including EC2, VPC, Auto Scaling, and Load Balancers. I help businesses build highly available,
+                    secure, and cost-optimized environments with infrastructure-as-code using Terraform/OpenTofu.</p>
+                <span class="click-hint">Tap to read more</span>
+            </div>
+
+            <div class="services-box" onclick="toggleService('devops')">
+                <i class='bx bx-server'></i>
+                <h3>DevOps Engineering</h3>
+                <p class="service-demo" id="demo-devops">I build CI/CD pipelines using GitHub Actions to automate
+                    testing, building, and deployment. My DevOps workflows ensure faster releases, environment
+                    consistency, and reliable application delivery using Docker, Kubernetes, and Linux-based automation.
+                </p>
+                <span class="click-hint">Tap to read more</span>
+            </div>
+
+            <div class="services-box" onclick="toggleService('auto')">
+                <i class='bx bx-cog'></i>
+                <h3>Robotic Process Automation (RPA)</h3>
+                <p class="service-demo" id="demo-auto">I develop automation bots using Automation Anywhere to
+                    eliminate repetitive tasks such as data extraction, report generation, and workflow orchestration,
+                    improving efficiency and accuracy in business operations.</p>
+                <span class="click-hint">Tap to read more</span>
+            </div>
+
+            <div class="services-box" onclick="toggleService('ai')">
+                <i class='bx bx-brain'></i>
+                <h3>AI & LLM Integration</h3>
+                <p class="service-demo" id="demo-ai">I build AI-powered systems using LangChain, MCP servers, and LLM
+                    APIs to enable intelligent workflows, real-time data processing, and conversational automation
+                    integrated with databases like MongoDB and Elasticsearch.</p>
+                <span class="click-hint">Tap to read more</span>
+            </div>
+        </div>
+
+        <div class="services-cta">
+            <p>Do you like these skills and services?</p>
+            <a href="#contact" class="btn">Contact Me</a>
         </div>
     </section>
 
@@ -84,77 +256,162 @@
     <section id="projects" class="projects">
         <h2 class="heading">Latest <span>Projects</span></h2>
 
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="cloud">Cloud</button>
+            <button class="filter-btn" data-filter="devops">DevOps</button>
+            <button class="filter-btn" data-filter="ai">AI & LLM</button>
+            <button class="filter-btn" data-filter="automation">Automation</button>
+        </div>
+
         <div class="portfolio-container">
-            <div class="portfolio-box">
+            <!-- Project 1: Model Context Protocol -->
+            <div class="portfolio-box filter-item ai">
                 <div class="portfolio-content">
-                    <h4>MCP Multi-Server Integration</h4>
-                    <p>Built a platform connecting Weather, MongoDB, and Elasticsearch tools with LangChain AI agent for
-                        intelligent workflows.</p>
+                    <h4>Model Context Protocol (MCP) Multi-Server Integration System</h4>
+                    <p>AI agent integrating MongoDB, Elasticsearch & Weather API to enable intelligent workflows,
+                        real-time data processing, and scalable data context handling.</p>
                     <div class="tech-stack">
-                        <span>Python</span><span>LangChain</span><span>MCP</span><span>AWS</span>
+                        <span>MCP</span><span>Python</span><span>AI</span>
                     </div>
                     <a href="https://github.com/Naveenveeramreddy" target="_blank" class="btn"><i
                             class='bx bx-link-external'></i> GitHub Repo</a>
                 </div>
             </div>
 
-            <div class="portfolio-box">
+            <!-- Project 2: Deploying applications in multiple environments -->
+            <div class="portfolio-box filter-item devops">
                 <div class="portfolio-content">
-                    <h4>CI/CD Pipeline Automation</h4>
-                    <p>Implemented automated DevOps pipelines to deploy applications across multiple environments
-                        ensuring seamless integration.</p>
+                    <h4>Deploying Apps in Multiple Environments</h4>
+                    <p>Implemented automated DevOps pipelines to deploy applications across multiple environments,
+                        ensuring seamless integration using CI/CD tools and Infrastructure as Code.</p>
                     <div class="tech-stack">
-                        <span>AWS</span><span>Linux</span><span>GitHub Actions</span>
+                        <span>AWS</span><span>Linux</span><span>CI/CD</span>
+                    </div>
+                    <a href="https://github.com/Naveenveeramreddy/Deploying-applications-in-multiple-environments"
+                        target="_blank" class="btn"><i class='bx bx-link-external'></i> GitHub Repo</a>
+                </div>
+            </div>
+
+            <!-- Project 3: Web Data Extraction Automation -->
+            <div class="portfolio-box filter-item automation">
+                <div class="portfolio-content">
+                    <h4>Web Data Extraction Automation</h4>
+                    <p>Developed an Automation Anywhere bot to extract dynamic web data to a CSV format seamlessly to
+                        eliminate repetitive tasks and streamline reporting.</p>
+                    <div class="tech-stack">
+                        <span>Automation Anywhere</span><span>RPA</span><span>Data</span>
                     </div>
                     <a href="https://github.com/Naveenveeramreddy" target="_blank" class="btn"><i
                             class='bx bx-link-external'></i> GitHub Repo</a>
                 </div>
             </div>
 
-            <div class="portfolio-box">
+            <!-- Hidden Projects (Initially hidden) -->
+            <div class="portfolio-box filter-item ai hidden-project">
                 <div class="portfolio-content">
-                    <h4>Web Data Extraction Bot</h4>
-                    <p>Developed an Automation Anywhere A360 bot to extract structured data from dynamic web pages and
-                        export it to CSV format.</p>
+                    <h4>LangChain RAG Agent</h4>
+                    <p>A Retrieval-Augmented Generation system using LangChain, vector embeddings, and local Ollama LLMs
+                        for semantic search over PDFs.</p>
                     <div class="tech-stack">
-                        <span>Automation Anywhere A360</span><span>Web Recorder</span>
+                        <span>Python</span><span>LangChain</span><span>Ollama</span>
                     </div>
-                    <a href="https://github.com/Naveenveeramreddy" target="_blank" class="btn"><i
+                    <a href="https://github.com/Naveenveeramreddy/LangChain_Rag-Agent" target="_blank" class="btn"><i
+                            class='bx bx-link-external'></i> GitHub Repo</a>
+                </div>
+            </div>
+
+            <div class="portfolio-box filter-item ai automation hidden-project">
+                <div class="portfolio-content">
+                    <h4>AI Restaurant Assistant</h4>
+                    <p>An AI-powered WhatsApp food ordering assistant built using n8n, Google Gemini, and Google Sheets
+                        to automate restaurant communication and manage orders.</p>
+                    <div class="tech-stack">
+                        <span>n8n</span><span>Google Gemini</span><span>WhatsApp API</span>
+                    </div>
+                    <a href="https://github.com/Naveenveeramreddy/AI-Restaurant-Assistant" target="_blank"
+                        class="btn"><i class='bx bx-link-external'></i> GitHub Repo</a>
+                </div>
+            </div>
+
+            <div class="portfolio-box filter-item cloud hidden-project">
+                <div class="portfolio-content">
+                    <h4>AWS 3-Tier Architecture Project</h4>
+                    <p>Setup of a highly available Three-Tier Architecture on AWS comprising Web, Application, and
+                        Database tiers using EC2, RDS, Load Balancers, and Auto Scaling.</p>
+                    <div class="tech-stack">
+                        <span>AWS VPC</span><span>EC2</span><span>RDS</span><span>ALB</span>
+                    </div>
+                    <a href="https://github.com/Naveenveeramreddy/3-tier-architecture" target="_blank" class="btn"><i
+                            class='bx bx-link-external'></i> GitHub Repo</a>
+                </div>
+            </div>
+
+            <div class="portfolio-box filter-item cloud devops hidden-project">
+                <div class="portfolio-content">
+                    <h4>AWS VPC & EC2 Provisioning</h4>
+                    <p>Automating the setup of AWS infrastructure (VPC, Subnets, IGW, Route Tables, Security Groups, and
+                        EC2) securely using Terraform for Infrastructure as Code.</p>
+                    <div class="tech-stack">
+                        <span>Terraform</span><span>AWS</span><span>IaC</span>
+                    </div>
+                    <a href="https://github.com/Naveenveeramreddy/Terraform" target="_blank" class="btn"><i
+                            class='bx bx-link-external'></i> GitHub Repo</a>
+                </div>
+            </div>
+
+            <div class="portfolio-box filter-item cloud hidden-project">
+                <div class="portfolio-content">
+                    <h4>Secure Web Apps via AWS Route 53</h4>
+                    <p>Deployed a secure 2-tier architecture with EC2, ALB, RDS, and Route 53 for DNS resolution.
+                        Secured via AWS Certificate Manager (ACM), WAF, and CloudFront.</p>
+                    <div class="tech-stack">
+                        <span>Route 53</span><span>CloudFront</span><span>WAF</span><span>ACM</span>
+                    </div>
+                    <a href="https://github.com/Naveenveeramreddy/Route-53" target="_blank" class="btn"><i
                             class='bx bx-link-external'></i> GitHub Repo</a>
                 </div>
             </div>
         </div>
+
+        <div class="show-more-container">
+            <button class="btn show-more-btn" id="showMoreProjectsBtn">Show More Projects <i
+                    class='bx bx-chevron-down'></i></button>
+        </div>
     </section>
 
-    <!-- Education Section -->
-    <section id="education" class="education">
-        <h2 class="heading">My <span>Education</span></h2>
+    <!-- Education Timeline Section -->
+    <section id="education" class="education-timeline">
+        <h2 class="heading">My <span>Experience & Education</span></h2>
 
-        <div class="education-row">
-            <div class="education-column">
-                <h3 class="title">Academics</h3>
-                <div class="education-box">
-                    <div class="education-content">
-                        <div class="content">
-                            <div class="year"><i class='bx bxs-calendar'></i> 2021 - 2025</div>
-                            <h3>B.Tech Electronics & Communication</h3>
-                            <p>Pragati Engineering College | CGPA: 7.7</p>
-                        </div>
-                    </div>
-                    <div class="education-content">
-                        <div class="content">
-                            <div class="year"><i class='bx bxs-calendar'></i> 2019 - 2021</div>
-                            <h3>Intermediate</h3>
-                            <p>FIITJEE | Marks: 888/1000</p>
-                        </div>
-                    </div>
-                    <div class="education-content">
-                        <div class="content">
-                            <div class="year"><i class='bx bxs-calendar'></i> 2018 - 2019</div>
-                            <h3>Class 10th</h3>
-                            <p>SASI | CGPA: 9.8</p>
-                        </div>
-                    </div>
+        <div class="timeline-wrapper">
+            <!-- Timeline Item 1 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2021 - 2025</div>
+                <div class="timeline-content-box">
+                    <h3>B.Tech Electronics & Communication</h3>
+                    <p>Pragati Engineering College | CGPA: 7.7</p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 2 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2019 - 2021</div>
+                <div class="timeline-content-box">
+                    <h3>Intermediate</h3>
+                    <p>FIITJEE | Marks: 888/1000</p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 3 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2018 - 2019</div>
+                <div class="timeline-content-box">
+                    <h3>Class 10th</h3>
+                    <p>SASI | CGPA: 9.8</p>
                 </div>
             </div>
         </div>
@@ -168,27 +425,77 @@
             <div class="education-column">
                 <h3 class="title">Certifications (2025)</h3>
                 <div class="education-box">
-                    <div class="education-content">
+                    <a href="mcp_cert.pdf" target="_blank" class="education-content" style="display:block">
                         <div class="content">
                             <h3><i class='bx bx-award'></i> Intro to Model Context Protocol</h3>
-                            <p>Anthropic</p>
+                            <p>Anthropic <span>(Click to view)</span></p>
                         </div>
-                    </div>
-                    <div class="education-content">
+                    </a>
+                    <a href="automation_anywhere.pdf" target="_blank" class="education-content" style="display:block">
                         <div class="content">
                             <h3><i class='bx bx-award'></i> Essentials Automation Certification</h3>
-                            <p>Automation Anywhere</p>
+                            <p>Automation Anywhere <span>(Click to view)</span></p>
                         </div>
-                    </div>
-                    <div class="education-content">
+                    </a>
+                    <a href="aws_cloud_cert.pdf" target="_blank" class="education-content" style="display:block">
+                        <div class="content">
+                            <h3><i class='bx bx-award'></i> AWS Cloud Certification</h3>
+                            <p>Amazon Web Services <span>(Click to view)</span></p>
+                        </div>
+                    </a>
+                    <a href="python_cert.pdf" target="_blank" class="education-content" style="display:block">
                         <div class="content">
                             <h3><i class='bx bx-award'></i> Python for Data Science</h3>
-                            <p>NPTEL</p>
+                            <p>NPTEL <span>(Click to view)</span></p>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- GitHub Contribution & Terminal Section -->
+    <section id="github" class="github-section">
+        <h2 class="heading">My <span>Code Activity</span></h2>
+
+        <!-- Interactive Terminal Component -->
+        <div class="terminal-container">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="close"></span>
+                    <span class="minimize"></span>
+                    <span class="maximize"></span>
+                </div>
+                <div class="terminal-title">naveen@portfolio: ~</div>
+            </div>
+            <div class="terminal-body" id="terminalOutput">
+                <!-- Typed intro text goes here -->
+            </div>
+            <div class="terminal-input-row" style="display: none;" id="terminalInputRow">
+                <span class="prompt">naveen@portfolio:~$</span>
+                <input type="text" id="terminalInput" placeholder="Type a command (e.g., 'help')..." autocomplete="off">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="heading">Contact <span>Me.</span></h2>
+
+        <form action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="49b9eb07-81b5-4048-8cef-cb150d661e48">
+
+            <div class="input-box">
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+            </div>
+            <div class="input-box">
+                <input type="tel" name="phone" placeholder="Mobile Number">
+                <input type="text" name="subject" placeholder="Email Subject">
+            </div>
+            <textarea name="message" id="" cols="30" rows="10" placeholder="Your Message" required></textarea>
+            <input type="submit" value="Send Message" class="btn">
+        </form>
     </section>
 
     <!-- Footer -->
@@ -201,6 +508,50 @@
         </div>
     </footer>
 
+    <!-- AI Chatbot Widget -->
+    <div id="chatbotWidget" class="chatbot-widget">
+        <!-- Chat Toggle Button -->
+        <button id="chatbotToggle" class="chatbot-toggle" aria-label="Open AI Assistant">
+            <i class='bx bx-bot' id="chatbotToggleIcon"></i>
+            <span class="chatbot-badge" id="chatbotBadge">1</span>
+        </button>
+
+        <!-- Chat Window -->
+        <div id="chatbotWindow" class="chatbot-window">
+            <!-- Header -->
+            <div class="chatbot-header">
+                <div class="chatbot-header-info">
+                    <div class="chatbot-avatar">
+                        <i class='bx bx-bot'></i>
+                        <span class="chatbot-status-dot"></span>
+                    </div>
+                    <div>
+                        <h4>Naveen Veeramreddy</h4>
+                        <p>Online · Ask me anything!</p>
+                    </div>
+                </div>
+                <button id="chatbotClose" class="chatbot-close-btn" aria-label="Close chat">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+
+            <!-- Messages Area -->
+            <div class="chatbot-messages" id="chatbotMessages">
+                <!-- Messages are injected via JS -->
+            </div>
+
+            <!-- Input Area -->
+            <div class="chatbot-input-area">
+                <input type="text" id="chatbotInput" placeholder="Ask me anything..." autocomplete="off" />
+                <button id="chatbotSend" class="chatbot-send-btn" aria-label="Send message">
+                    <i class='bx bx-send'></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ScrollReveal -->
+    <script src="https://unpkg.com/scrollreveal"></script>
     <!-- Typed JS for typing effect -->
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="script.js"></script>
